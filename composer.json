@@ -1,13 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "hoyoulyoun/laravel-ddd",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Project Portfolio",
+    "keywords": ["laravel", "ddd", "inertia", "sail", "octane", "xdebug"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.2",
+        "laravel/framework": "^10.16",
+        "laravel/octane": "^1.5",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.7",
         "tymon/jwt-auth": "^2.0"
@@ -16,7 +17,7 @@
         "brianium/paratest": "^7.1",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
-        "laravel/sail": "^1.0.1",
+        "laravel/sail": "^1.25",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.1",
         "phpunit/phpunit": "^10.0",
