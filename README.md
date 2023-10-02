@@ -1,10 +1,10 @@
 <h1 align="center">
-  Laravel 10 DDD interpretation
+  Laravel 10 DDD with Inertia.js & Octane & Sail
 </h1>
 
 <p align="center">
     <a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-10-FF2D20.svg?style=flat&logo=laravel" alt="Laravel 10"/></a>
-    <a href="https://www.php.net/"><img src="https://img.shields.io/badge/PHP-8.1-777BB4.svg?style=flat&logo=php" alt="PHP 8.1"/></a>
+    <a href="https://www.php.net/"><img src="https://img.shields.io/badge/PHP-8.2-777BB4.svg?style=flat&logo=php" alt="PHP 8.2"/></a>
     <a href="https://github.com/orphail/laravel-ddd/actions"><img src="https://github.com/younhoyoul/laravel-ddd/actions/workflows/laravel-tests.yml/badge.svg" alt="GithubActions"/></a>
 </p>
 
@@ -12,14 +12,19 @@
 https://github.com/Orphail/laravel-ddd
 
 ## First Step 
-For launch first
+For launch, run Laravel Sail first
+```
+docker compose build --no-cache
+docker compose up -d
+docker compose exec laravel.test bash
+```
+In the laravel.test container,
 ```
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan jwt:secret
-docker compose build --no-cache
-docker compose up -d
+npm install
+npm run build
 ```
 For new domains, use this command: `php artisan make:domain {Bounded Context} {Domain}` (e.g. `php artisan make:domain Blog Post`)
 ## Modification
