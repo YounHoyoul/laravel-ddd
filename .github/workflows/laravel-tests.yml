@@ -69,4 +69,4 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
       - name: Run Pint test
-          run: ./vendor/bin/pint --test
+        run: ./vendor/bin/pint --test
