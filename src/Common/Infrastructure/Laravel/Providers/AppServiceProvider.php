@@ -4,8 +4,6 @@ namespace Src\Common\Infrastructure\Laravel\Providers;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\ParallelTesting;
-use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             if ($data instanceof \JsonSerializable) {
                 $data = $data->jsonSerialize();
             }
+
             return response()->json($data, $code);
         });
 

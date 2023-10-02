@@ -15,7 +15,7 @@ final class Contacts extends ValueObjectArray
         parent::__construct($contacts);
 
         foreach ($contacts as $contact) {
-            if (!$contact instanceof Contact) {
+            if (! $contact instanceof Contact) {
                 throw new \InvalidArgumentException('Invalid contact');
             }
         }
@@ -30,7 +30,7 @@ final class Contacts extends ValueObjectArray
     public function update(Contact $newContact): void
     {
         $contactIds = array_column($this->contacts, 'id');
-        if (!in_array($newContact->id, $contactIds)) {
+        if (! in_array($newContact->id, $contactIds)) {
             throw new EntityNotFoundException('Contact not found');
         }
         $this->offsetSet(array_search($newContact->id, $contactIds), $newContact);
@@ -39,7 +39,7 @@ final class Contacts extends ValueObjectArray
     public function remove(int $contact_id): void
     {
         $contactIds = array_column($this->contacts, 'id');
-        if (!in_array($contact_id, $contactIds)) {
+        if (! in_array($contact_id, $contactIds)) {
             throw new EntityNotFoundException('Contact not found');
         }
         $this->offsetUnset(array_search($contact_id, $contactIds));

@@ -18,6 +18,7 @@ class GetRandomAvatarQuery implements QueryInterface
     public function handle(): ?string
     {
         authorize('getRandomAvatar', UserPolicy::class);
+
         return $this->avatarRepository->getRandomAvatar()->binary_data;
     }
 }

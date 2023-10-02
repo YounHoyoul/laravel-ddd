@@ -24,11 +24,12 @@ class JWTAuth implements AuthInterface
     public function login(array $credentials): string
     {
         $user = UserEloquentModel::query()->where('email', $credentials['email'])->first();
-        if (!$user || !$user->is_active) {
+        if (! $user || ! $user->is_active) {
             throw new AuthenticationException();
-        } elseif (!$token = auth()->attempt($credentials)) {
+        } elseif (! $token = auth()->attempt($credentials)) {
             throw new AuthenticationException();
         }
+
         return $token;
     }
 

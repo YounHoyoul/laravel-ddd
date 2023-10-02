@@ -1,6 +1,5 @@
 <?php
 
-
 // use Src\Auth\Presentation\HTTP\AuthController;
 
 // Route::group([
@@ -11,6 +10,7 @@
 //     Route::post('refresh', [AuthController::class, 'refresh']);
 //     Route::get('me', [AuthController::class, 'me']);
 // });
+use Illuminate\Support\Facades\Route;
 use Src\Auth\Presentation\HTTP\AuthenticatedSessionController;
 use Src\Auth\Presentation\HTTP\ConfirmablePasswordController;
 use Src\Auth\Presentation\HTTP\EmailVerificationNotificationController;
@@ -18,10 +18,9 @@ use Src\Auth\Presentation\HTTP\EmailVerificationPromptController;
 use Src\Auth\Presentation\HTTP\NewPasswordController;
 use Src\Auth\Presentation\HTTP\PasswordController;
 use Src\Auth\Presentation\HTTP\PasswordResetLinkController;
+use Src\Auth\Presentation\HTTP\ProfileController;
 use Src\Auth\Presentation\HTTP\RegisteredUserController;
 use Src\Auth\Presentation\HTTP\VerifyEmailController;
-use Src\Auth\Presentation\HTTP\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])

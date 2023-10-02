@@ -24,7 +24,7 @@ class RandomAvatarTest extends TestCase
         });
 
         $avatar = (new AvatarRepository($guzzleMock))->getRandomAvatar();
-        $avatarBinaryStr = 'data:image/png;base64,' . base64_encode('binary data');
+        $avatarBinaryStr = 'data:image/png;base64,'.base64_encode('binary data');
 
         $this->assertEquals(new Avatar(
             binary_data: $avatarBinaryStr,

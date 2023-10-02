@@ -2,9 +2,6 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel;
+use Src\Common\Infrastructure\Laravel\Controller;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {

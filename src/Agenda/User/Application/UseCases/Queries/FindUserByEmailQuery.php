@@ -12,14 +12,14 @@ class FindUserByEmailQuery implements QueryInterface
 
     public function __construct(
         private readonly string $email
-    )
-    {
+    ) {
         $this->repository = app()->make(UserRepositoryInterface::class);
     }
 
     public function handle(): array
     {
         authorize('findByEmail', UserPolicy::class);
+
         return $this->repository->findByEmail($this->email);
     }
 }

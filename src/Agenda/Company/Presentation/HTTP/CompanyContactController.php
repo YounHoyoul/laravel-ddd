@@ -21,6 +21,7 @@ class CompanyContactController
             $contact = ContactMapper::fromRequest($request);
             $company->addContact($contact);
             (new PersistContactsCommand($company))->execute();
+
             return response()->success($contact->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -37,6 +38,7 @@ class CompanyContactController
             $contact = ContactMapper::fromRequest($request, $contact_id);
             $company->updateContact($contact);
             (new PersistContactsCommand($company))->execute();
+
             return response()->success($contact->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -51,6 +53,7 @@ class CompanyContactController
             $company = (new FindCompanyByIdQuery($company_id))->handle();
             $company->removeContact($contact_id);
             (new RemoveContactCommand($contact_id))->execute();
+
             return response()->success(null, Response::HTTP_NO_CONTENT);
         } catch (UnauthorizedUserException $e) {
             return response()->error($e->getMessage(), Response::HTTP_UNAUTHORIZED);

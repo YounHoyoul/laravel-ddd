@@ -2,9 +2,9 @@
 
 namespace Src\Auth\Presentation\HTTP\Requests;
 
-use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel as User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel as User;
 
 class ProfileUpdateRequest extends FormRequest
 {

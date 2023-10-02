@@ -15,7 +15,7 @@ class CompanyTest extends TestCase
     {
         parent::setUp();
         $this->company_uri = '/company';
-        $this->index_uri = $this->company_uri . '/index';
+        $this->index_uri = $this->company_uri.'/index';
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class CompanyTest extends TestCase
         $randomCompanyId = $this->faker->randomElement($company_ids);
 
         $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
     }
@@ -68,7 +68,7 @@ class CompanyTest extends TestCase
             'num_addresses' => 1,
             'num_contacts' => 0,
             'num_departments' => 0,
-            'is_active' => $requestBody['is_active']
+            'is_active' => $requestBody['is_active'],
         ];
 
         unset($expectedResponse['main_address']['id']);
@@ -93,7 +93,7 @@ class CompanyTest extends TestCase
             'social_name' => $this->faker->company,
             'vat' => 'invalidvat',
             'is_active' => $this->faker->boolean,
-            'main_address' => AddressFactory::new()->toArray()
+            'main_address' => AddressFactory::new()->toArray(),
         ];
 
         $this->actingAs($this->admin)
@@ -110,7 +110,7 @@ class CompanyTest extends TestCase
         $randomCompanyId = $this->faker->randomElement($company_ids);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'main_address', 'social_name', 'vat', 'is_active']);
 
@@ -119,7 +119,7 @@ class CompanyTest extends TestCase
             'social_name' => $this->faker->company,
             'vat' => $company->json()['vat'],
             'is_active' => $this->faker->boolean,
-            'main_address' => AddressFactory::new()->toArray()
+            'main_address' => AddressFactory::new()->toArray(),
         ];
 
         $expectedResponse = [
@@ -128,14 +128,14 @@ class CompanyTest extends TestCase
             'social_name' => $requestBody['social_name'],
             'main_address' => $requestBody['main_address'],
             'vat' => $requestBody['vat'],
-            'is_active' => $requestBody['is_active']
+            'is_active' => $requestBody['is_active'],
         ];
 
         unset($expectedResponse['addresses'][0]['id']);
         unset($expectedResponse['addresses'][1]['id']);
 
         $this->actingAs($this->admin)
-            ->put($this->company_uri . '/' . $randomCompanyId, $requestBody)
+            ->put($this->company_uri.'/'.$randomCompanyId, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJson($expectedResponse);
 
@@ -144,11 +144,11 @@ class CompanyTest extends TestCase
             'social_name' => $this->faker->company,
             'vat' => 'invalidvat',
             'is_active' => $this->faker->boolean,
-            'main_address' => AddressFactory::new()->toArray()
+            'main_address' => AddressFactory::new()->toArray(),
         ];
 
         $this->actingAs($this->admin)
-            ->put($this->company_uri . '/' . $randomCompanyId, $requestBodyInvalidVat)
+            ->put($this->company_uri.'/'.$randomCompanyId, $requestBodyInvalidVat)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['error' => 'Vat must be valid']);
     }
@@ -161,11 +161,11 @@ class CompanyTest extends TestCase
         $randomCompanyId = $this->faker->randomElement($company_ids);
 
         $this->actingAs($this->admin)
-            ->delete($this->company_uri . '/' . $randomCompanyId)
+            ->delete($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -173,7 +173,7 @@ class CompanyTest extends TestCase
     public function cannot_delete_company_if_does_not_exists()
     {
         $this->actingAs($this->admin)
-            ->delete($this->company_uri . '/' . 99999)
+            ->delete($this->company_uri.'/'. 99999)
             ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -196,12 +196,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->post($this->company_uri . '/' . $randomCompanyId . '/address', $requestBody)
+            ->post($this->company_uri.'/'.$randomCompanyId.'/address', $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'type', 'street', 'zip_code', 'city', 'country', 'phone', 'email']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -231,12 +231,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->put($this->company_uri . '/' . $randomCompanyId . '/address/' . $address->id, $requestBody)
+            ->put($this->company_uri.'/'.$randomCompanyId.'/address/'.$address->id, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'type', 'street', 'zip_code', 'city', 'country', 'phone', 'email']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -255,11 +255,11 @@ class CompanyTest extends TestCase
         $address = $this->createAddress($randomCompanyId);
 
         $this->actingAs($this->admin)
-            ->delete($this->company_uri . '/' . $randomCompanyId . '/address/' . $address->id)
+            ->delete($this->company_uri.'/'.$randomCompanyId.'/address/'.$address->id)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -282,12 +282,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->post($this->company_uri . '/' . $randomCompanyId . '/department', $requestBody)
+            ->post($this->company_uri.'/'.$randomCompanyId.'/department', $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'name', 'address_id', 'is_active']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -313,12 +313,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->put($this->company_uri . '/' . $randomCompanyId . '/department/' . $department->id, $requestBody)
+            ->put($this->company_uri.'/'.$randomCompanyId.'/department/'.$department->id, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'name', 'address_id', 'is_active']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -338,11 +338,11 @@ class CompanyTest extends TestCase
         $department = $this->createDepartment($randomCompanyId, $addressId);
 
         $this->actingAs($this->admin)
-            ->delete($this->company_uri . '/' . $randomCompanyId . '/department/' . $department->id)
+            ->delete($this->company_uri.'/'.$randomCompanyId.'/department/'.$department->id)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -366,12 +366,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->post($this->company_uri . '/' . $randomCompanyId . '/contact', $requestBody)
+            ->post($this->company_uri.'/'.$randomCompanyId.'/contact', $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'contact_role', 'name', 'email', 'phone', 'address_id']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -398,12 +398,12 @@ class CompanyTest extends TestCase
         ];
 
         $this->actingAs($this->admin)
-            ->put($this->company_uri . '/' . $randomCompanyId . '/contact/' . $contact->id, $requestBody)
+            ->put($this->company_uri.'/'.$randomCompanyId.'/contact/'.$contact->id, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'contact_role', 'name', 'email', 'phone', 'address_id']);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -422,11 +422,11 @@ class CompanyTest extends TestCase
         $contact = $this->createContact($randomCompanyId);
 
         $this->actingAs($this->admin)
-            ->delete($this->company_uri . '/' . $randomCompanyId . '/contact/' . $contact->id)
+            ->delete($this->company_uri.'/'.$randomCompanyId.'/contact/'.$contact->id)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $company = $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'addresses', 'contacts', 'departments', 'is_active']);
 
@@ -456,13 +456,13 @@ class CompanyTest extends TestCase
 
         // User cannot retrieve company where it is not belonged to
         $this->actingAs($this->user)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
 
         // User can retrieve company where it belongs
         $this->actingAs($this->user)
-            ->get($this->company_uri . '/' . $this->user->company_id)
+            ->get($this->company_uri.'/'.$this->user->company_id)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'is_active']);
     }
@@ -475,7 +475,7 @@ class CompanyTest extends TestCase
             'social_name' => $this->faker->company,
             'vat' => $this->faker->bothify('?#########'),
             'is_active' => $this->faker->boolean,
-            'main_address' => AddressFactory::new()->toArray()
+            'main_address' => AddressFactory::new()->toArray(),
         ];
 
         $this->actingAs($this->user)
@@ -492,7 +492,7 @@ class CompanyTest extends TestCase
         $randomCompanyId = $this->faker->randomElement($company_ids);
 
         $this->actingAs($this->admin)
-            ->get($this->company_uri . '/' . $randomCompanyId)
+            ->get($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'fiscal_name', 'social_name', 'vat', 'is_active']);
 
@@ -501,11 +501,11 @@ class CompanyTest extends TestCase
             'social_name' => $this->faker->company,
             'vat' => $this->faker->bothify('?#########'),
             'is_active' => $this->faker->boolean,
-            'main_address' => AddressFactory::new()->toArray()
+            'main_address' => AddressFactory::new()->toArray(),
         ];
 
         $this->actingAs($this->user)
-            ->put($this->company_uri . '/' . $randomCompanyId, $requestBody)
+            ->put($this->company_uri.'/'.$randomCompanyId, $requestBody)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
     }
@@ -518,7 +518,7 @@ class CompanyTest extends TestCase
         $randomCompanyId = $this->faker->randomELement($company_ids);
 
         $this->actingAs($this->user)
-            ->delete($this->company_uri . '/' . $randomCompanyId)
+            ->delete($this->company_uri.'/'.$randomCompanyId)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
     }

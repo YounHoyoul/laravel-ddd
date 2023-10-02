@@ -10,9 +10,8 @@ final class Avatar extends ValueObject
     public function __construct(
         public ?string $binary_data,
         public ?string $filename
-    )
-    {
-        if (!$this->binary_data && $this->filename) {
+    ) {
+        if (! $this->binary_data && $this->filename) {
             $this->binary_data = app()->make(AvatarRepositoryInterface::class)->retrieveAvatarFile($this);
         }
     }
@@ -24,7 +23,7 @@ final class Avatar extends ValueObject
 
     public function getExtension(): ?string
     {
-        return pathinfo(storage_path('app/avatars/' . $this->filename), PATHINFO_EXTENSION);
+        return pathinfo(storage_path('app/avatars/'.$this->filename), PATHINFO_EXTENSION);
     }
 
     public function isNull(): bool
@@ -34,12 +33,12 @@ final class Avatar extends ValueObject
 
     public function hasBinaryData(): bool
     {
-        return !$this->isNull() && str_starts_with($this->binary_data, 'data:image');
+        return ! $this->isNull() && str_starts_with($this->binary_data, 'data:image');
     }
 
     public function fileExists(): bool
     {
-        return $this->filename && file_exists(storage_path('app/avatars/' . $this->filename));
+        return $this->filename && file_exists(storage_path('app/avatars/'.$this->filename));
     }
 
     public function __toString(): string

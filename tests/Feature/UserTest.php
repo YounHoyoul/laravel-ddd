@@ -17,8 +17,8 @@ class UserTest extends TestCase
     {
         parent::setUp();
         $this->user_uri = '/user';
-        $this->index_uri = $this->user_uri . '/index';
-        $this->random_avatar_uri = $this->user_uri . '/random-avatar';
+        $this->index_uri = $this->user_uri.'/index';
+        $this->random_avatar_uri = $this->user_uri.'/random-avatar';
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class UserTest extends TestCase
         $randomUserId = $this->faker->randomElement($user_ids);
 
         $this->actingAs($this->admin)
-            ->get($this->user_uri . '/' . $randomUserId)
+            ->get($this->user_uri.'/'.$randomUserId)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['id', 'name', 'email', 'avatar', 'is_admin', 'is_active']);
     }
@@ -65,7 +65,7 @@ class UserTest extends TestCase
             'email' => $requestBody['email'],
             'company_id' => $company->id,
             'is_admin' => false,
-            'is_active' => true
+            'is_active' => true,
         ];
 
         $this->actingAs($this->admin)
@@ -153,11 +153,11 @@ class UserTest extends TestCase
             'email' => $requestBody['email'],
             'avatar' => false,
             'is_admin' => false,
-            'is_active' => false
+            'is_active' => false,
         ];
 
         $this->actingAs($this->admin)
-            ->put($this->user_uri . '/' . $randomUserId, $requestBody)
+            ->put($this->user_uri.'/'.$randomUserId, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJson($expectedResponse);
     }
@@ -183,17 +183,16 @@ class UserTest extends TestCase
         $requestBodyInvalidPassword = $requestBody;
         $requestBodyInvalidPassword['password'] = '1234';
         $this->actingAs($this->admin)
-            ->put($this->user_uri . '/' . $randomUserId, $requestBodyInvalidPassword)
+            ->put($this->user_uri.'/'.$randomUserId, $requestBodyInvalidPassword)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['error' => 'The password needs to be at least 8 characters long']);
 
         $requestBodyNoPasswordConfirmation = $requestBody;
         unset($requestBodyNoPasswordConfirmation['password_confirmation']);
         $this->actingAs($this->admin)
-            ->put($this->user_uri . '/' . $randomUserId, $requestBodyNoPasswordConfirmation)
+            ->put($this->user_uri.'/'.$randomUserId, $requestBodyNoPasswordConfirmation)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['error' => 'Passwords do not match']);
-
     }
 
     /** @test */
@@ -204,11 +203,11 @@ class UserTest extends TestCase
         $randomUserId = $this->faker->randomElement($user_ids);
 
         $this->actingAs($this->admin)
-            ->delete($this->user_uri . '/' . $randomUserId)
+            ->delete($this->user_uri.'/'.$randomUserId)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->actingAs($this->admin)
-            ->get($this->user_uri . '/' . $randomUserId)
+            ->get($this->user_uri.'/'.$randomUserId)
             ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -216,7 +215,7 @@ class UserTest extends TestCase
     public function cannot_delete_user_if_does_not_exists()
     {
         $this->actingAs($this->admin)
-            ->delete($this->user_uri . '/' . 999)
+            ->delete($this->user_uri.'/'. 999)
             ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -236,7 +235,7 @@ class UserTest extends TestCase
         $this->actingAs($this->admin)
             ->get($this->random_avatar_uri)
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee('data:image\/png;base64,' . base64_encode($binaryDataStr));
+            ->assertSee('data:image\/png;base64,'.base64_encode($binaryDataStr));
     }
 
     // User Tests
@@ -260,7 +259,7 @@ class UserTest extends TestCase
         $randomUserId = $this->faker->randomElement($user_ids);
 
         $this->actingAs($this->user)
-            ->get($this->user_uri . '/' . $randomUserId)
+            ->get($this->user_uri.'/'.$randomUserId)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
     }
@@ -305,7 +304,7 @@ class UserTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->put($this->user_uri . '/' . $randomUserId, $requestBody)
+            ->put($this->user_uri.'/'.$randomUserId, $requestBody)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
 
@@ -326,11 +325,11 @@ class UserTest extends TestCase
             'name' => $requestBody['name'],
             'email' => $requestBody['email'],
             'avatar' => $requestBody['avatar'],
-            'is_active' => $requestBody['is_active']
+            'is_active' => $requestBody['is_active'],
         ];
 
         $this->actingAs($this->user)
-            ->put($this->user_uri . '/' . $this->user->id, $requestBody)
+            ->put($this->user_uri.'/'.$this->user->id, $requestBody)
             ->assertStatus(Response::HTTP_OK)
             ->assertJson($expectedResponse);
     }
@@ -343,7 +342,7 @@ class UserTest extends TestCase
         $randomUserId = $this->faker->randomElement($user_ids);
 
         $this->actingAs($this->user)
-            ->delete($this->user_uri . '/' . $randomUserId)
+            ->delete($this->user_uri.'/'.$randomUserId)
             ->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertSee(['error' => 'The user is not authorized to access this resource or perform this action']);
     }

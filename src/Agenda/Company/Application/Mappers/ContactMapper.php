@@ -28,6 +28,7 @@ class ContactMapper
     {
         $contactEloquentModel = new ContactEloquentModel($contact);
         $contactEloquentModel->id = $contact['id'] ?? null;
+
         return self::fromEloquent($contactEloquentModel);
     }
 
@@ -54,6 +55,7 @@ class ContactMapper
         $contactEloquent->name = $contact->name;
         $contactEloquent->email = $contact->email;
         $contactEloquent->phone = $contact->phone;
+
         return $contactEloquent;
     }
 }

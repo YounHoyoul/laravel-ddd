@@ -2,7 +2,6 @@
 
 namespace Src\Agenda\User\Application\UseCases\Commands;
 
-use Illuminate\Support\Str;
 use Src\Agenda\User\Application\Exceptions\EmailAlreadyUsedException;
 use Src\Agenda\User\Domain\Model\User;
 use Src\Agenda\User\Domain\Model\ValueObjects\Password;
@@ -15,13 +14,13 @@ use Src\Common\Domain\CommandInterface;
 class UpdateUserCommand implements CommandInterface
 {
     private UserRepositoryInterface $repository;
+
     private AvatarRepositoryInterface $avatarRepository;
 
     public function __construct(
         private readonly User $user,
         private readonly Password $password
-    )
-    {
+    ) {
         $this->repository = app()->make(UserRepositoryInterface::class);
         $this->avatarRepository = app()->make(AvatarRepositoryInterface::class);
     }

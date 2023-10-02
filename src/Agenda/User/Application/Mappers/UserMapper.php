@@ -29,6 +29,7 @@ class UserMapper
     public static function fromEloquent(UserEloquentModel $userEloquent): User
     {
         $avatar = new Avatar(binary_data: null, filename: $userEloquent->avatar);
+
         return new User(
             id: $userEloquent->id,
             name: new Name($userEloquent->name),
@@ -43,6 +44,7 @@ class UserMapper
     public static function fromAuth(Authenticatable $userEloquent): User
     {
         $avatar = new Avatar(binary_data: null, filename: $userEloquent->avatar);
+
         return new User(
             id: $userEloquent->id,
             name: new Name($userEloquent->name),
@@ -66,6 +68,7 @@ class UserMapper
         $userEloquent->avatar = $user->avatar->filename;
         $userEloquent->is_admin = $user->is_admin;
         $userEloquent->is_active = $user->is_active;
+
         return $userEloquent;
     }
 }

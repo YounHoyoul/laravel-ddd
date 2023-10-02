@@ -7,7 +7,7 @@ use Src\Agenda\Company\Presentation\HTTP\CompanyController;
 use Src\Agenda\Company\Presentation\HTTP\CompanyDepartmentController;
 
 Route::group([
-    'prefix' => 'company'
+    'prefix' => 'company',
 ], function () {
     Route::get('index', [CompanyController::class, 'index']);
     Route::get('{id}', [CompanyController::class, 'show']);

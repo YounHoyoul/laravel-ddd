@@ -18,6 +18,7 @@ class FindAllUsersQuery implements QueryInterface
     public function handle(): array
     {
         authorize('findAll', UserPolicy::class);
+
         return $this->repository->findAll();
     }
 }

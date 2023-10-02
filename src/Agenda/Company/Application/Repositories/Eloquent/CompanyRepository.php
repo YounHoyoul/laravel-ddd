@@ -19,16 +19,21 @@ class CompanyRepository implements CompanyRepositoryInterface
         foreach (CompanyEloquentModel::all() as $companyEloquent) {
             $companies[] = CompanyWithMainAddressData::fromEloquent($companyEloquent);
         }
+
         return $companies;
     }
+
     public function findById(string $id): Company
     {
         $companyEloquent = CompanyEloquentModel::query()->findOrFail($id);
+
         return CompanyMapper::fromEloquent($companyEloquent, true, true, true);
     }
+
     public function findByVat(string $vat): Company
     {
         $companyEloquent = CompanyEloquentModel::query()->where('vat', $vat)->firstOrFail();
+
         return CompanyMapper::fromEloquent($companyEloquent, true, true, true);
     }
 
@@ -41,9 +46,11 @@ class CompanyRepository implements CompanyRepositoryInterface
             $mainAddressEloquent = AddressMapper::toEloquent($main_address);
             $mainAddressEloquent->company_id = $companyEloquent->id;
             $mainAddressEloquent->save();
+
             return CompanyWithMainAddressData::fromEloquent($companyEloquent);
         });
     }
+
     public function update(CompanyData $company): void
     {
         $companyArray = $company->toArray();
@@ -51,6 +58,7 @@ class CompanyRepository implements CompanyRepositoryInterface
         $companyEloquent->fill($companyArray);
         $companyEloquent->save();
     }
+
     public function delete(int $company_id): void
     {
         $companyEloquent = CompanyEloquentModel::query()->findOrFail($company_id);

@@ -2,11 +2,11 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
+use Src\Common\Infrastructure\Laravel\Controller;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 
 class VerifyEmailController extends Controller
 {

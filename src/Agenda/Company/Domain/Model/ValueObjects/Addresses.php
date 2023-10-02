@@ -15,7 +15,7 @@ final class Addresses extends ValueObjectArray
         parent::__construct($addresses);
 
         foreach ($addresses as $address) {
-            if (!$address instanceof Address) {
+            if (! $address instanceof Address) {
                 throw new \InvalidArgumentException('Invalid address');
             }
         }
@@ -30,7 +30,7 @@ final class Addresses extends ValueObjectArray
     public function update(Address $newAddress): void
     {
         $addressIds = array_column($this->addresses, 'id');
-        if (!in_array($newAddress->id, $addressIds)) {
+        if (! in_array($newAddress->id, $addressIds)) {
             throw new EntityNotFoundException('Address not found');
         }
         $this->offsetSet(array_search($newAddress->id, $addressIds), $newAddress);
@@ -39,7 +39,7 @@ final class Addresses extends ValueObjectArray
     public function remove(int $address_id): void
     {
         $addressIds = array_column($this->addresses, 'id');
-        if (!in_array($address_id, $addressIds)) {
+        if (! in_array($address_id, $addressIds)) {
             throw new EntityNotFoundException('Address not found');
         }
         $this->offsetUnset(array_search($address_id, $addressIds));
@@ -50,6 +50,7 @@ final class Addresses extends ValueObjectArray
         $mainAddress = array_filter($this->addresses, function ($address) {
             return $address->type === AddressType::Fiscal;
         });
+
         return $mainAddress ? array_shift($mainAddress) : null;
     }
 
@@ -58,6 +59,7 @@ final class Addresses extends ValueObjectArray
         $otherAddresses = array_filter($this->addresses, function ($address) {
             return $address->type !== AddressType::Fiscal;
         });
+
         return new Addresses($otherAddresses);
     }
 

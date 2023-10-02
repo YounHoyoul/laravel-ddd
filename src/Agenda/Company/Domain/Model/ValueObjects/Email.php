@@ -14,11 +14,11 @@ final class Email extends ValueObject
 
     public function __construct(?string $email, $isOptional = false)
     {
-        if (!$email && !$isOptional) {
+        if (! $email && ! $isOptional) {
             throw new RequiredException('email');
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new IncorrectEmailFormatException();
         }
 

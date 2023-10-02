@@ -21,6 +21,7 @@ class CompanyDepartmentController
             $department = DepartmentMapper::fromRequest($request);
             $company->addDepartment($department);
             (new PersistDepartmentsCommand($company))->execute();
+
             return response()->success($department->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -37,6 +38,7 @@ class CompanyDepartmentController
             $department = DepartmentMapper::fromRequest($request, $department_id);
             $company->updateDepartment($department);
             (new PersistDepartmentsCommand($company))->execute();
+
             return response()->success($department->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -51,10 +53,10 @@ class CompanyDepartmentController
             $company = (new FindCompanyByIdQuery($company_id))->handle();
             $company->removeDepartment($department_id);
             (new RemoveDepartmentCommand($department_id))->execute();
+
             return response()->success(null, Response::HTTP_NO_CONTENT);
         } catch (UnauthorizedUserException $e) {
             return response()->error($e->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
     }
-
 }

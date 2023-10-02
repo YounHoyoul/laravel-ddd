@@ -3,8 +3,6 @@
 namespace Src\Common\Infrastructure\Laravel\Kernel;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Src\Common\Infrastructure\Laravel\Middleware\JwtMiddleware;
 
 //use Bugsnag\BugsnagLaravel\OomBootstrapper;
 

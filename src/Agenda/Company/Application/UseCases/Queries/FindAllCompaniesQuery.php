@@ -18,6 +18,7 @@ class FindAllCompaniesQuery implements QueryInterface
     public function handle(): array
     {
         authorize('findAll', CompanyPolicy::class);
+
         return $this->repository->findAll();
     }
 }

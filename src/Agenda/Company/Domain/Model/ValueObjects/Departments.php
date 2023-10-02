@@ -14,7 +14,7 @@ final class Departments extends ValueObjectArray
     {
         parent::__construct($departments);
         foreach ($departments as $department) {
-            if (!$department instanceof Department) {
+            if (! $department instanceof Department) {
                 throw new \InvalidArgumentException('Invalid department');
             }
         }
@@ -29,7 +29,7 @@ final class Departments extends ValueObjectArray
     public function update(Department $newDepartment): void
     {
         $departmentIds = array_column($this->departments, 'id');
-        if (!in_array($newDepartment->id, $departmentIds)) {
+        if (! in_array($newDepartment->id, $departmentIds)) {
             throw new EntityNotFoundException('Department not found');
         }
         $this->offsetSet(array_search($newDepartment->id, $departmentIds), $newDepartment);
@@ -38,7 +38,7 @@ final class Departments extends ValueObjectArray
     public function remove(int $department_id): void
     {
         $departmentIds = array_column($this->departments, 'id');
-        if (!in_array($department_id, $departmentIds)) {
+        if (! in_array($department_id, $departmentIds)) {
             throw new EntityNotFoundException('Department not found');
         }
         $this->offsetUnset(array_search($department_id, $departmentIds));

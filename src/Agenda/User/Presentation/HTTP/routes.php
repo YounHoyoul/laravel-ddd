@@ -5,7 +5,7 @@ use Src\Agenda\User\Presentation\HTTP\GetRandomAvatarController;
 use Src\Agenda\User\Presentation\HTTP\UserController;
 
 Route::group([
-    'prefix' => 'user'
+    'prefix' => 'user',
 ], function () {
     Route::get('random-avatar', GetRandomAvatarController::class);
 

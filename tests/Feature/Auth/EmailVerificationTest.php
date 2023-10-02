@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Auth;
 
-use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel as User;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Tests\TestCase;
 use Tests\WithUsers;
 

@@ -12,14 +12,14 @@ class FindCompanyByVatQuery implements QueryInterface
 
     public function __construct(
         private readonly string $vat
-    )
-    {
+    ) {
         $this->repository = app()->make(CompanyRepositoryInterface::class);
     }
 
     public function handle(): array
     {
         authorize('findByVat', CompanyPolicy::class);
+
         return $this->repository->findByVat($this->vat);
     }
 }

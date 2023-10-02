@@ -13,14 +13,14 @@ class FindUserByIdQuery implements QueryInterface
 
     public function __construct(
         private readonly int $id
-    )
-    {
+    ) {
         $this->repository = app()->make(UserRepositoryInterface::class);
     }
 
     public function handle(): User
     {
         authorize('findById', UserPolicy::class);
+
         return $this->repository->findById($this->id);
     }
 }

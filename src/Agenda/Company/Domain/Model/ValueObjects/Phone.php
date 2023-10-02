@@ -13,7 +13,7 @@ final class Phone extends ValueObject
 
     public function __construct(?string $name, $isOptional = false)
     {
-        if (!$name && !$isOptional) {
+        if (! $name && ! $isOptional) {
             throw new RequiredException('teléfono');
         }
 

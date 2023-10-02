@@ -28,7 +28,7 @@ class ContactEloquentModel extends Model
         'name' => 'required|string',
         'contact_role' => 'required|string',
         'email' => 'required|string',
-        'phone' => 'required|string'
+        'phone' => 'required|string',
     ];
 
     /**

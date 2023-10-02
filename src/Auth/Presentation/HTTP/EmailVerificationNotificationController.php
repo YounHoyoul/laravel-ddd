@@ -2,10 +2,10 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Src\Common\Infrastructure\Laravel\Controller;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 
 class EmailVerificationNotificationController extends Controller
 {

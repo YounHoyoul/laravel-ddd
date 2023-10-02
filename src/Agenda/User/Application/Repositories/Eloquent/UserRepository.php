@@ -16,18 +16,21 @@ class UserRepository implements UserRepositoryInterface
         foreach (UserEloquentModel::all() as $userEloquent) {
             $users[] = UserMapper::fromEloquent($userEloquent);
         }
+
         return $users;
     }
 
     public function findById(string $userId): User
     {
         $userEloquent = UserEloquentModel::query()->findOrFail($userId);
+
         return UserMapper::fromEloquent($userEloquent);
     }
 
     public function findByEmail(string $email): User
     {
         $userEloquent = UserEloquentModel::query()->where('email', $email)->firstOrFail();
+
         return UserMapper::fromEloquent($userEloquent);
     }
 

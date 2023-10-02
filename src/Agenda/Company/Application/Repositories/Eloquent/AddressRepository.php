@@ -17,6 +17,7 @@ class AddressRepository implements AddressRepositoryInterface
             $addressEloquent->save();
         }
     }
+
     public function remove(int $address_id): void
     {
         $addressEloquent = AddressEloquentModel::query()->findOrFail($address_id);

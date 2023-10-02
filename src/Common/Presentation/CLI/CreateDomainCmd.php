@@ -30,7 +30,7 @@ class CreateDomainCmd extends Command
     {
         $boundedContext = $this->argument('boundedContext');
         $domainName = $this->argument('domainName');
-        $basePath = 'src/' . $boundedContext . '/' . $domainName;
+        $basePath = 'src/'.$boundedContext.'/'.$domainName;
 
         // Application
         $applicationStructure = [
@@ -44,8 +44,8 @@ class CreateDomainCmd extends Command
             'UseCases/Queries',
         ];
         foreach ($applicationStructure as $applicationDirectory) {
-            File::makeDirectory($basePath . '/Application/' . $applicationDirectory, 0755, true);
-            touch($basePath . '/Application/' . $applicationDirectory . '/.gitkeep');
+            File::makeDirectory($basePath.'/Application/'.$applicationDirectory, 0755, true);
+            touch($basePath.'/Application/'.$applicationDirectory.'/.gitkeep');
         }
 
         // Domain
@@ -55,10 +55,10 @@ class CreateDomainCmd extends Command
             'Model',
             'Policies',
             'Repositories',
-            'ShipmentServices'
+            'ShipmentServices',
         ];
         foreach ($domainStructure as $domainDirectory) {
-            $path = $basePath . '/Domain/' . $domainDirectory;
+            $path = $basePath.'/Domain/'.$domainDirectory;
             File::makeDirectory($path, 0755, true);
             if ($domainDirectory === 'Model') {
                 $stub = File::get('./stubs/DomainModel.stub');
@@ -67,30 +67,31 @@ class CreateDomainCmd extends Command
                     '**Domain**' => $domainName,
                 ];
                 $file = strtr($stub, $stubReplace);
-                File::put($path . '/' . $domainName . '.php', $file);
+                File::put($path.'/'.$domainName.'.php', $file);
+
                 continue;
             }
-            touch($basePath . '/Domain/' . $domainDirectory . '/.gitkeep');
+            touch($basePath.'/Domain/'.$domainDirectory.'/.gitkeep');
         }
 
         // Infrastructure
         $infrastructureStructure = [
-            'EloquentModels'
+            'EloquentModels',
         ];
         foreach ($infrastructureStructure as $infrastructureDirectory) {
-            File::makeDirectory($basePath . '/Infrastructure/' . $infrastructureDirectory, 0755, true);
-            touch($basePath . '/Infrastructure/' . $infrastructureDirectory . '/.gitkeep');
+            File::makeDirectory($basePath.'/Infrastructure/'.$infrastructureDirectory, 0755, true);
+            touch($basePath.'/Infrastructure/'.$infrastructureDirectory.'/.gitkeep');
         }
 
         // Presentation
         $presentationStructure = [
             'API',
             'CLI',
-            'HTTP'
+            'HTTP',
         ];
         foreach ($presentationStructure as $presentationDirectory) {
-            File::makeDirectory($basePath . '/Presentation/' . $presentationDirectory, 0755, true);
-            touch($basePath . '/Presentation/' . $presentationDirectory . '/.gitkeep');
+            File::makeDirectory($basePath.'/Presentation/'.$presentationDirectory, 0755, true);
+            touch($basePath.'/Presentation/'.$presentationDirectory.'/.gitkeep');
         }
 
         return 1;

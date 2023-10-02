@@ -23,6 +23,7 @@ class DepartmentMapper
     {
         $departmentEloquentModel = new DepartmentEloquentModel($department);
         $departmentEloquentModel->id = $department['id'] ?? null;
+
         return self::fromEloquent($departmentEloquentModel);
     }
 
@@ -45,6 +46,7 @@ class DepartmentMapper
         $departmentEloquent->address_id = $department->address_id;
         $departmentEloquent->name = $department->name;
         $departmentEloquent->is_active = $department->is_active;
+
         return $departmentEloquent;
     }
 }

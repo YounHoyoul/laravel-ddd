@@ -2,11 +2,11 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Src\Common\Infrastructure\Laravel\Controller;
 
 class PasswordController extends Controller
 {

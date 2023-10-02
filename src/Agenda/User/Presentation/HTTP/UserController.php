@@ -42,6 +42,7 @@ class UserController extends Controller
             $userData->validateNonAdminWithCompany();
             $password = new Password($request->input('password'), $request->input('password_confirmation'));
             $user = (new StoreUserCommand($userData, $password))->execute();
+
             return response()->success($user->toArray(), Response::HTTP_CREATED);
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -56,6 +57,7 @@ class UserController extends Controller
             $user = UserMapper::fromRequest($request, $user_id);
             $password = new Password($request->input('password'), $request->input('password_confirmation'));
             (new UpdateUserCommand($user, $password))->execute();
+
             return response()->success($user->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -68,6 +70,7 @@ class UserController extends Controller
     {
         try {
             (new DestroyUserCommand($user_id))->execute();
+
             return response()->success(null, Response::HTTP_NO_CONTENT);
         } catch (UnauthorizedUserException $e) {
             return response()->error($e->getMessage(), Response::HTTP_UNAUTHORIZED);

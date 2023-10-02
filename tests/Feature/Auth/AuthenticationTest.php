@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Tests\TestCase;
 use Tests\WithUsers;
 

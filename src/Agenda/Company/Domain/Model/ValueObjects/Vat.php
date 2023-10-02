@@ -12,11 +12,11 @@ final class Vat extends ValueObject
 
     public function __construct(?string $vat)
     {
-        if (!$vat) {
+        if (! $vat) {
             throw new RequiredException('vat');
         }
 
-        if (!preg_match('/([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/', $vat)) {
+        if (! preg_match('/([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/', $vat)) {
             throw new IncorrectVatFormatException();
         }
 
@@ -32,5 +32,4 @@ final class Vat extends ValueObject
     {
         return $this->vat;
     }
-
 }

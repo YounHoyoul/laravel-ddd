@@ -2,14 +2,14 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use Src\Common\Infrastructure\Laravel\Controller;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 
 class ConfirmablePasswordController extends Controller
 {

@@ -2,8 +2,6 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Auth\Presentation\HTTP\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Src\Auth\Presentation\HTTP\Requests\ProfileUpdateRequest;
+use Src\Common\Infrastructure\Laravel\Controller;
 
 class ProfileController extends Controller
 {

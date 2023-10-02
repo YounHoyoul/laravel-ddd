@@ -13,8 +13,7 @@ final class Name extends ValueObject
 
     public function __construct(?string $name)
     {
-
-        if (!$name) {
+        if (! $name) {
             throw new RequiredException('name');
         }
 

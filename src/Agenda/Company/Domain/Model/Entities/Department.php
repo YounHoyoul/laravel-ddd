@@ -14,7 +14,8 @@ class Department extends Entity
         public readonly Name $name,
         public readonly int $address_id,
         public readonly bool $is_active = true
-    ) {}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -22,7 +23,7 @@ class Department extends Entity
             'id' => $this->id,
             'name' => $this->name,
             'address_id' => $this->address_id,
-            'is_active' => $this->is_active
+            'is_active' => $this->is_active,
         ];
     }
 }

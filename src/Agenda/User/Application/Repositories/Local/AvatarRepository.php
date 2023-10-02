@@ -13,22 +13,24 @@ class AvatarRepository implements AvatarRepositoryInterface
 {
     public function __construct(
         private readonly ClientInterface $guzzle = new Client
-    )
-    {}
+    ) {
+    }
 
     public function getRandomAvatar($url = 'https://doodleipsum.com/300/avatar-2?shape=circle'): Avatar
     {
         $doodleIpsum = $this->guzzle->request('GET', $url);
         $mime = $doodleIpsum->getHeader('Content-Type')[0];
         $binaryImage = base64_encode($doodleIpsum->getBody()->getContents());
-        return new Avatar(binary_data: 'data:' . $mime . ';base64,' . $binaryImage, filename: null);
+
+        return new Avatar(binary_data: 'data:'.$mime.';base64,'.$binaryImage, filename: null);
     }
 
     public function storeAvatarFile(Avatar $avatar): ?string
     {
         $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $avatar->binary_data));
-        $filename = Str::uuid() . '.jpg';
+        $filename = Str::uuid().'.jpg';
         Storage::disk('avatars')->put($filename, $fileData);
+
         return $filename;
     }
 
@@ -36,8 +38,10 @@ class AvatarRepository implements AvatarRepositoryInterface
     {
         if ($avatar->fileExists()) {
             $fileData = Storage::disk('avatars')->get($avatar->filename);
-            return 'data:image/' . $avatar->getExtension() . ';base64,' . base64_encode($fileData);
+
+            return 'data:image/'.$avatar->getExtension().';base64,'.base64_encode($fileData);
         }
+
         return null;
     }
 

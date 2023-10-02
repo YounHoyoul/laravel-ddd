@@ -14,11 +14,11 @@ final class Country extends ValueObject
 
     public function __construct(?string $value)
     {
-        if (!$value) {
+        if (! $value) {
             throw new RequiredException('country');
         }
 
-        if (!$this->isValidISOCode($value)) {
+        if (! $this->isValidISOCode($value)) {
             throw new InvalidISOCodeException();
         }
 
@@ -27,7 +27,7 @@ final class Country extends ValueObject
 
     private function isValidISOCode(string $value): bool
     {
-        return (bool)preg_match('/^[A-Z]{2}$/', $value);
+        return (bool) preg_match('/^[A-Z]{2}$/', $value);
     }
 
     public function __toString(): string

@@ -25,10 +25,10 @@ trait WithLogin
         $userEloquent->save();
 
         return [
-            'id'         => $userEloquent->id,
+            'id' => $userEloquent->id,
             'company_id' => $userEloquent->company_id,
-            'email'      => $user->email,
-            'password'   => $password,
+            'email' => $user->email,
+            'password' => $password,
         ];
     }
 
@@ -54,8 +54,8 @@ trait WithLogin
         $company = $this->newCompany();
         $password = $this->faker->password(8);
         $user = UserFactory::new([
-            'is_admin' => false, 
-            'company_id' => $company->id
+            'is_admin' => false,
+            'company_id' => $company->id,
         ]);
         $userEloquent = UserMapper::toEloquent($user);
 
@@ -68,6 +68,7 @@ trait WithLogin
     protected function getToken(TestResponse $response)
     {
         $arResponse = json_decode($response->getContent(), true);
+
         return $arResponse['accessToken'];
     }
 }

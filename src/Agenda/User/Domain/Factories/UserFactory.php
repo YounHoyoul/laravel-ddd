@@ -2,11 +2,10 @@
 
 namespace Src\Agenda\User\Domain\Factories;
 
-use Carbon\Carbon;
 use Src\Agenda\User\Domain\Model\User;
 use Src\Agenda\User\Domain\Model\ValueObjects\Avatar;
-use Src\Agenda\User\Domain\Model\ValueObjects\Email;
 use Src\Agenda\User\Domain\Model\ValueObjects\CompanyId;
+use Src\Agenda\User\Domain\Model\ValueObjects\Email;
 use Src\Agenda\User\Domain\Model\ValueObjects\Name;
 
 class UserFactory

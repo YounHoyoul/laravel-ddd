@@ -21,6 +21,7 @@ class CompanyAddressController
             $address = AddressMapper::fromRequest($request);
             $company->addAddress($address);
             (new PersistAddressesCommand($company))->execute();
+
             return response()->success($address->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -37,6 +38,7 @@ class CompanyAddressController
             $address = AddressMapper::fromRequest($request, $address_id);
             $company->updateAddress($address);
             (new PersistAddressesCommand($company))->execute();
+
             return response()->success($address->toArray());
         } catch (\DomainException $domainException) {
             return response()->error($domainException->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -51,10 +53,10 @@ class CompanyAddressController
             $company = (new FindCompanyByIdQuery($company_id))->handle();
             $company->removeAddress($address_id);
             (new RemoveAddressCommand($address_id))->execute();
+
             return response()->success(null, Response::HTTP_NO_CONTENT);
         } catch (UnauthorizedUserException $e) {
             return response()->error($e->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
     }
-
 }

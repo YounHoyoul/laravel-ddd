@@ -35,6 +35,7 @@ class AddressMapper
     {
         $addressEloquentModel = new AddressEloquentModel($address);
         $addressEloquentModel->id = $address['id'] ?? null;
+
         return self::fromEloquent($addressEloquentModel);
     }
 
@@ -67,6 +68,7 @@ class AddressMapper
         $addressEloquent->country = $address->country;
         $addressEloquent->phone = $address->phone;
         $addressEloquent->email = $address->email;
+
         return $addressEloquent;
     }
 }

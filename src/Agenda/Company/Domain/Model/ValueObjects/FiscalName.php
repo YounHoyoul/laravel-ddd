@@ -13,7 +13,7 @@ final class FiscalName extends ValueObject
 
     public function __construct(?string $name)
     {
-        if (!$name) {
+        if (! $name) {
             throw new RequiredException('razón social');
         }
 

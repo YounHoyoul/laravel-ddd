@@ -5,7 +5,6 @@ namespace Src\Agenda\User\Infrastructure\EloquentModels;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class UserEloquentModel extends Authenticatable
 {
@@ -25,7 +24,7 @@ class UserEloquentModel extends Authenticatable
         'avatar',
         'password',
         'is_admin',
-        'is_active'
+        'is_active',
     ];
 
     public array $rules = [
@@ -60,6 +59,6 @@ class UserEloquentModel extends Authenticatable
         'is_admin' => 'boolean',
         'is_active' => 'boolean',
         'avatar' => 'string',
-        'password' => 'hashed'
+        'password' => 'hashed',
     ];
 }

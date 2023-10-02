@@ -32,7 +32,7 @@ class CreateRoutesCmd extends Command
         $boundedContext = $this->argument('boundedContext');
         $domainName = $this->argument('domainName');
 
-        $path = 'src/' . $boundedContext . '/' . $domainName . '/Presentation/HTTP/routes.php';
+        $path = 'src/'.$boundedContext.'/'.$domainName.'/Presentation/HTTP/routes.php';
 
         $stub = File::get('./stubs/routes.stub');
         $stubReplace = [
@@ -44,6 +44,7 @@ class CreateRoutesCmd extends Command
         $file = strtr($stub, $stubReplace);
 
         File::put($path, $file);
+
         return 1;
     }
 }

@@ -31,6 +31,7 @@ trait WithCompanies
             $addressEloquent->company_id = $companyEloquent->id;
             $addressEloquent->save();
         }
+
         return CompanyMapper::fromEloquent($companyEloquent, true);
     }
 
@@ -41,6 +42,7 @@ trait WithCompanies
             $company = $this->newCompany();
             $company_ids[] = $company->id;
         }
+
         return $company_ids;
     }
 
@@ -50,6 +52,7 @@ trait WithCompanies
         $addressEloquent = AddressMapper::toEloquent($address);
         $addressEloquent->company_id = $company_id;
         $addressEloquent->save();
+
         return AddressMapper::fromEloquent($addressEloquent);
     }
 
@@ -60,6 +63,7 @@ trait WithCompanies
         $departmentEloquent->company_id = $company_id;
         $departmentEloquent->address_id = $address_id;
         $departmentEloquent->save();
+
         return DepartmentMapper::fromEloquent($departmentEloquent);
     }
 
@@ -69,7 +73,7 @@ trait WithCompanies
         $contactEloquent = ContactMapper::toEloquent($contact);
         $contactEloquent->company_id = $company_id;
         $contactEloquent->save();
+
         return ContactMapper::fromEloquent($contactEloquent);
     }
-
 }

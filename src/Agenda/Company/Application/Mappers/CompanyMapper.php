@@ -18,10 +18,11 @@ class CompanyMapper
     public static function fromRequest(Request $request, ?int $company_id = null): Company
     {
         $main_address = $request->input('main_address');
-        if (!$main_address) {
+        if (! $main_address) {
             throw new RequiredMainAddressException();
         }
         $addresses = [$main_address, ...$request->input('addresses', [])];
+
         return new Company(
             id: $company_id,
             fiscal_name: new FiscalName($request->string('fiscal_name')),
@@ -51,6 +52,7 @@ class CompanyMapper
         $contacts = $with_contacts ? array_map(function ($address) {
             return ContactMapper::fromArray($address);
         }, $companyEloquent->contacts?->toArray() ?? []) : [];
+
         return new Company(
             id: $companyEloquent->id,
             fiscal_name: new FiscalName($companyEloquent->fiscal_name),
@@ -73,6 +75,7 @@ class CompanyMapper
         $companyEloquent->social_name = $company->social_name;
         $companyEloquent->vat = $company->vat;
         $companyEloquent->is_active = $company->is_active;
+
         return $companyEloquent;
     }
 }

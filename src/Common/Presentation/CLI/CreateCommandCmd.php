@@ -33,7 +33,7 @@ class CreateCommandCmd extends Command
         $domainName = $this->argument('domainName');
         $commandName = $this->argument('commandName');
 
-        $path = 'src/' . $boundedContext . '/' . $domainName . '/Application/UseCases/Commands/' . $commandName . '.php';
+        $path = 'src/'.$boundedContext.'/'.$domainName.'/Application/UseCases/Commands/'.$commandName.'.php';
 
         $stub = File::get('./stubs/Command.stub');
         $stubReplace = [
@@ -41,12 +41,13 @@ class CreateCommandCmd extends Command
             '**Domain**' => $domainName,
             '**CommandName**' => $commandName,
             '**domain_lc**' => Str::snake($domainName),
-            '**action**' => Str::camel(preg_replace('/(' . $domainName . ')?Command/', '', $commandName)),
+            '**action**' => Str::camel(preg_replace('/('.$domainName.')?Command/', '', $commandName)),
         ];
 
         $file = strtr($stub, $stubReplace);
 
         File::put($path, $file);
+
         return 1;
     }
 }

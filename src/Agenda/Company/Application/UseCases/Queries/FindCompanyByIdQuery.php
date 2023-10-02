@@ -13,14 +13,14 @@ class FindCompanyByIdQuery implements QueryInterface
 
     public function __construct(
         private readonly int $id
-    )
-    {
+    ) {
         $this->repository = app()->make(CompanyRepositoryInterface::class);
     }
 
     public function handle(): Company
     {
         authorize('findById', CompanyPolicy::class, ['company_id' => $this->id]);
+
         return $this->repository->findById($this->id);
     }
 }

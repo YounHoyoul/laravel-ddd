@@ -33,7 +33,7 @@ class CreateQueryCmd extends Cmd
         $domainName = $this->argument('domainName');
         $queryName = $this->argument('queryName');
 
-        $path = 'src/' . $boundedContext . '/' . $domainName . '/Application/UseCases/Queries/' . $queryName . '.php';
+        $path = 'src/'.$boundedContext.'/'.$domainName.'/Application/UseCases/Queries/'.$queryName.'.php';
 
         $stub = File::get('./stubs/Query.stub');
         $stubReplace = [
@@ -41,12 +41,13 @@ class CreateQueryCmd extends Cmd
             '**Domain**' => $domainName,
             '**QueryName**' => $queryName,
             '**domain_lc**' => Str::snake($domainName),
-            '**action**' => Str::camel(preg_replace('/(' . $domainName . ')?Query/', '', $queryName)),
+            '**action**' => Str::camel(preg_replace('/('.$domainName.')?Query/', '', $queryName)),
         ];
 
         $file = strtr($stub, $stubReplace);
 
         File::put($path, $file);
+
         return 1;
     }
 }

@@ -26,7 +26,8 @@ class Address extends Entity
         public readonly Country $country,
         public readonly Phone $phone,
         public readonly Email $email
-    ) {}
+    ) {
+    }
 
     public function toArray(): array
     {
@@ -39,7 +40,7 @@ class Address extends Entity
             'city' => $this->city,
             'country' => $this->country,
             'phone' => $this->phone,
-            'email' => $this->email
+            'email' => $this->email,
         ];
     }
 }

@@ -17,14 +17,14 @@ class DepartmentEloquentModel extends Model
         'company_id',
         'address_id',
         'name',
-        'is_active'
+        'is_active',
     ];
 
     public array $rules = [
         'company_id' => 'required|integer',
         'address_id' => 'nullable|integer',
         'name' => 'required|string',
-        'is_active' => 'required|boolean'
+        'is_active' => 'required|boolean',
     ];
 
     /**
@@ -45,7 +45,7 @@ class DepartmentEloquentModel extends Model
     protected $casts = [
         'company_id' => 'integer',
         'address_id' => 'integer',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function company()

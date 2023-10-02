@@ -1,4 +1,5 @@
 <?php
+
 namespace Src\Auth\Presentation\HTTP;
 
 use Illuminate\Auth\AuthenticationException;
@@ -21,9 +22,6 @@ class AuthController extends Controller
 
     /**
      * Get a JWT via given credentials.
-     *
-     * @param Request $request
-     * @return JsonResponse
      */
     public function login(Request $request): JsonResponse
     {
@@ -40,18 +38,17 @@ class AuthController extends Controller
                 throw new ValidationException($validator);
             }
             $token = $this->auth->login($credentials);
+
             return $this->respondWithToken($token);
         } catch (ValidationException $validationException) {
             return response()->json($validationException->errors(), Response::HTTP_BAD_REQUEST);
         } catch (AuthenticationException) {
-            return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED );
+            return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
     }
 
     /**
      * Get the authenticated UserEloquentModel.
-     *
-     * @return JsonResponse
      */
     public function me(): JsonResponse
     {
@@ -60,19 +57,16 @@ class AuthController extends Controller
 
     /**
      * Log the user out (Invalidate the token).
-     *
-     * @return JsonResponse
      */
     public function logout(): JsonResponse
     {
         $this->auth->logout();
+
         return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
      * Refresh a token.
-     *
-     * @return JsonResponse
      */
     public function refresh(): JsonResponse
     {
@@ -87,10 +81,6 @@ class AuthController extends Controller
 
     /**
      * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return JsonResponse
      */
     protected function respondWithToken(string $token): JsonResponse
     {

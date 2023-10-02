@@ -22,7 +22,7 @@ trait WithUsers
         );
     }
 
-    protected function newUserEloquent(array $attributes = null) : UserEloquentModel
+    protected function newUserEloquent(array $attributes = null): UserEloquentModel
     {
         $user = UserFactory::new($attributes);
         $userEloquent = UserMapper::toEloquent($user);
@@ -39,6 +39,7 @@ trait WithUsers
         foreach (range(1, $usersNumber) as $_) {
             $user_ids[] = $this->newUserEloquent()->id;
         }
+
         return $user_ids;
     }
 }

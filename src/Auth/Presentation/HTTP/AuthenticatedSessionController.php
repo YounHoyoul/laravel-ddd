@@ -2,15 +2,15 @@
 
 namespace Src\Auth\Presentation\HTTP;
 
-use Src\Common\Infrastructure\Laravel\Controller;
-use Src\Auth\Presentation\HTTP\Requests\LoginRequest;
-use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Src\Auth\Presentation\HTTP\Requests\LoginRequest;
+use Src\Common\Infrastructure\Laravel\Controller;
+use Src\Common\Infrastructure\Laravel\Providers\RouteServiceProvider;
 
 class AuthenticatedSessionController extends Controller
 {

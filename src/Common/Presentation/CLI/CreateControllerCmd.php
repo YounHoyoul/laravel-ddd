@@ -32,7 +32,7 @@ class CreateControllerCmd extends Command
         $boundedContext = $this->argument('boundedContext');
         $domainName = $this->argument('domainName');
 
-        $path = 'src/' . $boundedContext . '/' . $domainName . '/Presentation/HTTP/' . $domainName . 'Controller.php';
+        $path = 'src/'.$boundedContext.'/'.$domainName.'/Presentation/HTTP/'.$domainName.'Controller.php';
 
         $stub = File::get('./stubs/Controller.stub');
         $stubReplace = [
@@ -44,6 +44,7 @@ class CreateControllerCmd extends Command
         $file = strtr($stub, $stubReplace);
 
         File::put($path, $file);
+
         return 1;
     }
 }
