@@ -61,7 +61,7 @@ class UserMapper
             $userEloquent = UserEloquentModel::query()->findOrFail($user->id);
         }
         $userEloquent->name = $user->name;
-        $userEloquent->email = $user->email;
+        $userEloquent->email = $user->email->email;
         $userEloquent->company_id = $user->company_id->value;
         $userEloquent->avatar = $user->avatar->filename;
         $userEloquent->is_admin = $user->is_admin;

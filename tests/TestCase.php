@@ -12,8 +12,9 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->adminToken = $this->newLoggedAdmin()['token'];
-        $this->userData = $this->newLoggedUser();
-        $this->userToken = $this->userData['token'];
+        $this->admin = $this->newLoggedAdmin();
+        $this->user = $this->newLoggedUser();
+        // $this->userData = $this->newLoggedUser();
+        // $this->userToken = $this->userData['token'];
     }
 }

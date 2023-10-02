@@ -5,14 +5,14 @@
 <p align="center">
     <a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-10-FF2D20.svg?style=flat&logo=laravel" alt="Laravel 10"/></a>
     <a href="https://www.php.net/"><img src="https://img.shields.io/badge/PHP-8.1-777BB4.svg?style=flat&logo=php" alt="PHP 8.1"/></a>
-    <a href="https://github.com/orphail/laravel-ddd/actions"><img src="https://github.com/orphail/laravel-ddd/actions/workflows/laravel-tests.yml/badge.svg" alt="GithubActions"/></a>
+    <a href="https://github.com/orphail/laravel-ddd/actions"><img src="https://github.com/younhoyoul/laravel-ddd/actions/workflows/laravel-tests.yml/badge.svg" alt="GithubActions"/></a>
 </p>
 
 ## Base project
 https://github.com/Orphail/laravel-ddd
 
 ## First Step 
-For launch first,
+For launch first
 ```
 composer install
 cp .env.example .env

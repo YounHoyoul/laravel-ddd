@@ -30,17 +30,15 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
-
-            Route::middleware('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('internal_api')
-                ->group(function() {
+                ->group(function () {
+                    require base_path('routes/web.php');
                     require base_path('src/Auth/Presentation/HTTP/routes.php');
                     require base_path('src/Agenda/User/Presentation/HTTP/routes.php');
                     require base_path('src/Agenda/Company/Presentation/HTTP/routes.php');
                 });
+
+            Route::middleware('api')
+                ->group(base_path('routes/api.php'));
         });
     }
 
@@ -51,8 +49,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('internal_api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->ip());
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

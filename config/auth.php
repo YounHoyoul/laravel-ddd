@@ -1,5 +1,7 @@
 <?php
 
+use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel as User;
+
 return [
 
     /*
@@ -14,7 +16,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'internal-api',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -40,11 +42,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'internal-api' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-            'hash' => false,
-        ],
     ],
 
     /*
@@ -67,7 +64,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel::class,
+            'model' => User::class,
         ],
 
         // 'users' => [

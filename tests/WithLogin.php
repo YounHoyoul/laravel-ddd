@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use Src\Agenda\User\Application\Mappers\UserMapper;
 use Src\Agenda\User\Domain\Factories\UserFactory;
+use Src\Agenda\User\Infrastructure\EloquentModels\UserEloquentModel;
 
 trait WithLogin
 {
@@ -31,19 +32,37 @@ trait WithLogin
         ];
     }
 
-    protected function newLoggedAdmin(): array
+    protected function newLoggedAdmin(): UserEloquentModel
     {
-        $credentials = $this->validCredentials(['is_admin' => true]);
-        $response = $this->post('auth/login', $credentials);
-        return ['token' => $this->getToken($response), ...$credentials];
+        $password = $this->faker->password(8);
+        $user = UserFactory::new(['is_admin' => true]);
+        $userEloquent = UserMapper::toEloquent($user);
+
+        $userEloquent->password = $password;
+        $userEloquent->save();
+
+        return $userEloquent;
     }
 
-    protected function newLoggedUser(): array
+    protected function newLoggedUser(): UserEloquentModel
     {
+        // $company = $this->newCompany();
+        // $credentials = $this->validCredentials(['is_admin' => false, 'company_id' => $company->id]);
+        // $response = $this->post('auth/login', $credentials);
+        // return ['token' => $this->getToken($response), ...$credentials];
+
         $company = $this->newCompany();
-        $credentials = $this->validCredentials(['is_admin' => false, 'company_id' => $company->id]);
-        $response = $this->post('auth/login', $credentials);
-        return ['token' => $this->getToken($response), ...$credentials];
+        $password = $this->faker->password(8);
+        $user = UserFactory::new([
+            'is_admin' => false, 
+            'company_id' => $company->id
+        ]);
+        $userEloquent = UserMapper::toEloquent($user);
+
+        $userEloquent->password = $password;
+        $userEloquent->save();
+
+        return $userEloquent;
     }
 
     protected function getToken(TestResponse $response)

@@ -10,7 +10,7 @@ use Src\Common\Domain\ValueObject;
 
 final class Email extends ValueObject
 {
-    private string $email;
+    public string $email;
 
     public function __construct(?string $email, $isOptional = false)
     {

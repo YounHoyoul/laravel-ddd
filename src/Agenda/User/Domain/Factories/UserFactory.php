@@ -2,6 +2,7 @@
 
 namespace Src\Agenda\User\Domain\Factories;
 
+use Carbon\Carbon;
 use Src\Agenda\User\Domain\Model\User;
 use Src\Agenda\User\Domain\Model\ValueObjects\Avatar;
 use Src\Agenda\User\Domain\Model\ValueObjects\Email;
@@ -21,6 +22,7 @@ class UserFactory
             'avatar' => null,
             'is_admin' => true,
             'is_active' => true,
+            'email_verified_at' => now(),
         ];
 
         $attributes = array_replace($defaults, $attributes);

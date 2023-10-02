@@ -5,10 +5,9 @@ namespace Src\Agenda\User\Infrastructure\EloquentModels;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Src\Agenda\User\Infrastructure\EloquentModels\Casts\PasswordCast;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserEloquentModel extends Authenticatable implements JWTSubject
+class UserEloquentModel extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
@@ -61,25 +60,6 @@ class UserEloquentModel extends Authenticatable implements JWTSubject
         'is_admin' => 'boolean',
         'is_active' => 'boolean',
         'avatar' => 'string',
-        'password' => PasswordCast::class
+        'password' => 'hashed'
     ];
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }
