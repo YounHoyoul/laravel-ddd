@@ -53,8 +53,10 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
         
-      - name: Install npm
-        run: npm run build
+      - name: Install frontend module
+        run: |
+          npm install
+          npm run build
 
       - name: Run Migration
         run: php artisan migrate -v
